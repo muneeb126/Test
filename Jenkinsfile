@@ -1,15 +1,15 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk8'
+        maven 'M3'
+        jdk 'JDK 1.8'
     }
  
 
 
 pipeline {
-    agent {
-        // define agent details
+    agent any { 
+        
     }
     stages {
         stage('Example stage 1') {
@@ -26,7 +26,7 @@ pipeline {
             }
         }
   stage('SCM') {
-    git 'https://github.com/foo/bar.git'
+    git 'https://github.com/muneeb126/Test'
   }
    stages {
         stage ('Initialize') {
