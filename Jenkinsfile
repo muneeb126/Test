@@ -33,7 +33,7 @@ pipeline {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
+                    echo "M3_HOME = ${M3_HOME}"
                 '''
             }
         }
@@ -58,7 +58,7 @@ stage('Build with unit testing') {
                     // ** NOTE: This 'M3' Maven tool must be configured
                     // **       in the global configuration.
                     echo 'Pulling...' + env.BRANCH_NAME
-                    def mvnHome = tool 'Maven 3.3.9'
+                    def mvnHome = tool 'M3'
                     if (isUnix()) {
                         def targetVersion = getDevVersion()
                         print 'target build version...'
@@ -86,7 +86,7 @@ stage('Build with unit testing') {
             // Run integration test
             steps {
                 script {
-                    def mvnHome = tool 'Maven 3.3.9'
+                    def mvnHome = tool 'M3'
                     if (isUnix()) {
                         // just to trigger the integration test without unit testing
                         sh "'${mvnHome}/bin/mvn'  verify -Dunit-tests.skip=true"
@@ -103,7 +103,7 @@ stage('Build with unit testing') {
             // Run the sonar scan
             steps {
                 script {
-                    def mvnHome = tool 'Maven 3.3.9'
+                    def mvnHome = tool 'M3'
                     withSonarQubeEnv {
 
                         sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
