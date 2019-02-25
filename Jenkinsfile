@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    node ('windows')
 
     stages {
         stage('Build') {
